@@ -19,13 +19,19 @@ export async function signUp(
     name: formData.get("name"),
     email: formData.get("email"),
     password: formData.get("password"),
+    confirmPassword: formData.get("confirmPassword"),
+    terms: formData.get("terms") === "on",
   });
 
   if (!parsed.success) {
     return { fieldErrors: parsed.error.flatten().fieldErrors };
   }
 
-  const { data, error } = await auth.signUp.email(parsed.data);
+  const { data, error } = await auth.signUp.email({
+    name: parsed.data.name,
+    email: parsed.data.email,
+    password: parsed.data.password,
+  });
 
   if (error) {
     return { error: error.message || "Failed to create account" };
@@ -35,7 +41,7 @@ export async function signUp(
     await syncUserWithPrisma(data.user);
   }
 
-  redirect("/");
+  redirect("/auth/sign-in");
 }
 
 export async function signIn(
@@ -57,7 +63,7 @@ export async function signIn(
     return { error: error.message || "Failed to sign in" };
   }
 
-  redirect("/");
+  redirect("/dashboard");
 }
 
 export async function signOut() {

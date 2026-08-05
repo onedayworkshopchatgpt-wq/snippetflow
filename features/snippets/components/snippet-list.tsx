@@ -138,7 +138,7 @@ export function SnippetList({
     if (filters?.recentlyUpdated) params.set("recent", "1")
     if (sort !== "updated") params.set("sort", sort)
     const qs = params.toString()
-    return qs ? `/snippets?${qs}` : "/snippets"
+    return qs ? `/dashboard/snippets?${qs}` : "/dashboard/snippets"
   }
 
   const openCreate = () => {

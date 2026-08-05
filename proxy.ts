@@ -5,5 +5,5 @@ export default auth.middleware({
 });
 
 export const config = {
-  matcher: ["/snippets/:path*", "/dashboard/:path*", "/settings/:path*"],
+  matcher: ["/dashboard/:path*"],
 };

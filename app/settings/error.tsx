@@ -1,0 +1,43 @@
+"use client"
+
+import * as React from "react"
+import { motion } from "framer-motion"
+import { TriangleAlert } from "lucide-react"
+
+import { Button } from "@/components/ui/button"
+
+export default function SettingsError({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string }
+  reset: () => void
+}) {
+  React.useEffect(() => {
+    console.error(error)
+  }, [error])
+
+  return (
+    <div className="mx-auto w-full max-w-3xl flex-1 px-4 py-8 sm:px-6 lg:py-10">
+      <motion.div
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+        className="flex flex-col items-center justify-center gap-3 rounded-xl border border-dashed bg-card/50 px-6 py-16 text-center"
+      >
+        <div className="flex size-11 items-center justify-center rounded-xl border bg-destructive/10 text-destructive">
+          <TriangleAlert className="size-5" />
+        </div>
+        <div className="grid gap-1">
+          <p className="font-medium">Couldn&apos;t load settings</p>
+          <p className="text-sm text-muted-foreground">
+            Something went wrong while loading your settings. Try again.
+          </p>
+        </div>
+        <Button className="mt-1" onClick={reset}>
+          Try again
+        </Button>
+      </motion.div>
+    </div>
+  )
+}

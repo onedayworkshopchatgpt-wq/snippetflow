@@ -19,7 +19,7 @@ export function WorkspaceHeader({
       )}
     >
       <div className="grid gap-1">
-        <h1 className="font-heading text-2xl font-semibold tracking-tight">
+        <h1 className="font-heading text-xl font-semibold tracking-tight">
           {title}
         </h1>
         {description ? (

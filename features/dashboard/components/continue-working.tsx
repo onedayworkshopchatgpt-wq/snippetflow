@@ -3,6 +3,8 @@
 import Link from "next/link"
 import { FileCode2 } from "lucide-react"
 
+import { Button } from "@/components/ui/button"
+import { DashboardEmptyState } from "@/components/dashboard/dashboard-empty-state"
 import { StaggerContainer, StaggerItem } from "@/components/shared/motion"
 import {
   SNIPPET_LANGUAGE_LABELS,
@@ -38,31 +40,33 @@ export function formatRelativeTime(date: string) {
   return "just now"
 }
 
-export function RecentSnippets({ snippets }: { snippets: RecentSnippet[] }) {
+export function ContinueWorking({ snippets }: { snippets: RecentSnippet[] }) {
+  const recent = snippets.slice(0, 3)
+
   return (
     <section className="grid h-fit gap-3">
       <div className="grid gap-0.5">
         <h2 className="font-heading text-sm font-medium tracking-tight">
-          Recent snippets
+          Continue working
         </h2>
         <p className="text-sm text-muted-foreground">
-          Your latest work, ready to revisit.
+          Your latest snippets, ready to revisit.
         </p>
       </div>
 
-      {snippets.length === 0 ? (
-        <div className="flex flex-col items-center justify-center gap-2 rounded-xl border border-dashed bg-card/50 px-6 py-10 text-center">
-          <div className="flex size-9 items-center justify-center rounded-lg border bg-muted/50 text-muted-foreground">
-            <FileCode2 className="size-4" />
-          </div>
-          <p className="text-sm font-medium">Nothing here yet</p>
-          <p className="text-xs text-muted-foreground">
-            Create a snippet and it will show up here.
-          </p>
-        </div>
+      {recent.length === 0 ? (
+        <DashboardEmptyState
+          icon={FileCode2}
+          title="Nothing here yet"
+          description="Snippets you create will appear here for quick access."
+        >
+          <Button asChild size="sm">
+            <Link href="/dashboard/snippets">Create your first snippet</Link>
+          </Button>
+        </DashboardEmptyState>
       ) : (
         <StaggerContainer className="grid gap-2">
-          {snippets.map((snippet) => {
+          {recent.map((snippet) => {
             const languageLabel =
               SNIPPET_LANGUAGE_LABELS[snippet.language as SnippetLanguage] ??
               snippet.language
@@ -71,7 +75,7 @@ export function RecentSnippets({ snippets }: { snippets: RecentSnippet[] }) {
               <StaggerItem key={snippet.id}>
                 <Link
                   href="/dashboard/snippets"
-                  className="group flex items-center gap-3 rounded-xl border border-border bg-card p-3 transition-[box-shadow,border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-foreground/15 hover:shadow-lifted"
+                  className="group flex items-center gap-3 rounded-lg border border-border bg-card p-2.5 transition-[box-shadow,border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-foreground/15 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
                 >
                   <div className="flex size-8 shrink-0 items-center justify-center rounded-lg border bg-muted/50 text-muted-foreground transition-colors group-hover:bg-primary/10 group-hover:text-primary">
                     <FileCode2 className="size-4" />

@@ -3,11 +3,12 @@
 import Link from "next/link"
 import { History, Pencil, Plus } from "lucide-react"
 
+import { DashboardEmptyState } from "@/components/dashboard/dashboard-empty-state"
 import { StaggerContainer, StaggerItem } from "@/components/shared/motion"
 import {
   formatRelativeTime,
   type RecentSnippet,
-} from "./recent-snippets"
+} from "./continue-working"
 
 export function RecentActivity({ snippets }: { snippets: RecentSnippet[] }) {
   const events = snippets.map((snippet) => ({
@@ -29,15 +30,11 @@ export function RecentActivity({ snippets }: { snippets: RecentSnippet[] }) {
       </div>
 
       {events.length === 0 ? (
-        <div className="flex flex-col items-center justify-center gap-2 rounded-xl border border-dashed bg-card/50 px-6 py-10 text-center">
-          <div className="flex size-9 items-center justify-center rounded-lg border bg-muted/50 text-muted-foreground">
-            <History className="size-4" />
-          </div>
-          <p className="text-sm font-medium">No activity yet</p>
-          <p className="text-xs text-muted-foreground">
-            Changes to your snippets will appear here.
-          </p>
-        </div>
+        <DashboardEmptyState
+          icon={History}
+          title="No activity yet"
+          description="Edits, shares, and imports will show up here."
+        />
       ) : (
         <StaggerContainer className="grid gap-2">
           {events.map((event) => {
@@ -46,7 +43,7 @@ export function RecentActivity({ snippets }: { snippets: RecentSnippet[] }) {
               <StaggerItem key={event.id}>
                 <Link
                   href="/dashboard/snippets"
-                  className="group flex items-center gap-3 rounded-xl border border-border bg-card p-3 transition-[box-shadow,border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-foreground/15 hover:shadow-lifted"
+                  className="group flex items-center gap-3 rounded-lg border border-border bg-card p-2.5 transition-[box-shadow,border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-foreground/15 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
                 >
                   <div className="flex size-8 shrink-0 items-center justify-center rounded-lg border bg-muted/50 text-muted-foreground transition-colors group-hover:bg-primary/10 group-hover:text-primary">
                     {created ? (

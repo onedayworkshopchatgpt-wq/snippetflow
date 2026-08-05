@@ -1,7 +1,8 @@
 "use client"
 
+import * as React from "react"
 import Link from "next/link"
-import { Settings, User as UserIcon } from "lucide-react"
+import { LogOut, Settings, User as UserIcon } from "lucide-react"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
@@ -13,6 +14,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+
+import { LogoutDialog } from "./logout-button"
 
 export type DashboardUser = {
   id: string
@@ -30,50 +33,66 @@ function initials(name: string | null, email: string) {
 }
 
 export function DashboardUserMenu({ user }: { user: DashboardUser }) {
+  const [logoutOpen, setLogoutOpen] = React.useState(false)
   const displayName = user.name ?? "Account"
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="rounded-full"
-          aria-label="Open account menu"
-        >
-          <Avatar>
-            {user.avatarUrl ? (
-              <AvatarImage src={user.avatarUrl} alt={displayName} />
-            ) : (
-              <AvatarFallback>{initials(user.name, user.email)}</AvatarFallback>
-            )}
-          </Avatar>
-        </Button>
-      </DropdownMenuTrigger>
+    <>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="size-8 rounded-full p-0 transition-colors duration-150 hover:bg-muted/60"
+            aria-label="Open account menu"
+          >
+            <Avatar>
+              {user.avatarUrl ? (
+                <AvatarImage src={user.avatarUrl} alt={displayName} />
+              ) : (
+                <AvatarFallback>
+                  {initials(user.name, user.email)}
+                </AvatarFallback>
+              )}
+            </Avatar>
+          </Button>
+        </DropdownMenuTrigger>
 
-      <DropdownMenuContent align="end" className="w-56">
-        <DropdownMenuLabel className="flex flex-col gap-0.5">
-          <span className="truncate text-sm font-medium text-foreground">
-            {displayName}
-          </span>
-          <span className="truncate text-xs font-normal text-muted-foreground">
-            {user.email}
-          </span>
-        </DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem asChild>
-          <Link href="/dashboard/profile">
-            <UserIcon className="size-4" aria-hidden />
-            Profile
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href="/dashboard/settings">
-            <Settings className="size-4" aria-hidden />
-            Settings
-          </Link>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+        <DropdownMenuContent align="end" className="w-60 p-1.5">
+          <DropdownMenuLabel className="px-2 py-1.5">
+            <span className="truncate text-sm font-medium text-foreground">
+              {displayName}
+            </span>
+            <span className="truncate text-xs font-normal text-muted-foreground">
+              {user.email}
+            </span>
+          </DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem asChild className="gap-2">
+            <Link href="/dashboard/profile">
+              <UserIcon className="size-4" aria-hidden />
+              Profile
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild className="gap-2">
+            <Link href="/dashboard/settings">
+              <Settings className="size-4" aria-hidden />
+              Settings
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem
+            variant="destructive"
+            className="gap-2"
+            onClick={() => setLogoutOpen(true)}
+          >
+            <LogOut className="size-4" aria-hidden />
+            Logout
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      <LogoutDialog open={logoutOpen} onOpenChange={setLogoutOpen} />
+    </>
   )
 }

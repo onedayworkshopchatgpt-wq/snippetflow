@@ -45,7 +45,7 @@ export function RecentActivity({ snippets }: { snippets: RecentSnippet[] }) {
             return (
               <StaggerItem key={event.id}>
                 <Link
-                  href="/snippets"
+                  href="/dashboard/snippets"
                   className="group flex items-center gap-3 rounded-xl border border-border bg-card p-3 transition-[box-shadow,border-color,transform] duration-200 hover:-translate-y-0.5 hover:border-foreground/15 hover:shadow-lifted"
                 >
                   <div className="flex size-8 shrink-0 items-center justify-center rounded-lg border bg-muted/50 text-muted-foreground transition-colors group-hover:bg-primary/10 group-hover:text-primary">

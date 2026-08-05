@@ -15,25 +15,25 @@ const QUICK_ACTIONS: {
   {
     label: "New snippet",
     description: "Capture a new piece of code",
-    href: "/snippets",
+    href: "/dashboard/snippets",
     icon: FilePlus2,
   },
   {
     label: "Browse snippets",
     description: "Search and organize your library",
-    href: "/snippets",
+    href: "/dashboard/snippets",
     icon: FolderOpen,
   },
   {
     label: "Favorites",
     description: "Open your starred snippets",
-    href: "/snippets?filter=favorites",
+    href: "/dashboard/snippets?filter=favorites",
     icon: Star,
   },
   {
     label: "Trash",
     description: "Restore or clear deleted snippets",
-    href: "/snippets?filter=trash",
+    href: "/dashboard/snippets?filter=trash",
     icon: Trash2,
   },
 ]

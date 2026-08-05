@@ -38,7 +38,7 @@ export function FilterMenu({ filters = {} }: { filters?: SnippetFilters }) {
       if (next.recentlyUpdated) params.set("recent", "1")
       else params.delete("recent")
       const qs = params.toString()
-      router.push(qs ? `/snippets?${qs}` : "/snippets")
+      router.push(qs ? `/dashboard/snippets?${qs}` : "/dashboard/snippets")
     },
     [filters, router],
   )

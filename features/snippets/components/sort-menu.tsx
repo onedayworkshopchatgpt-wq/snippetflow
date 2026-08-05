@@ -40,7 +40,7 @@ export function SortMenu({
       if (value === "updated") params.delete("sort")
       else params.set("sort", value)
       const qs = params.toString()
-      router.push(qs ? `/snippets?${qs}` : "/snippets")
+      router.push(qs ? `/dashboard/snippets?${qs}` : "/dashboard/snippets")
     },
     [router],
   )

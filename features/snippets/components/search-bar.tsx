@@ -28,7 +28,7 @@ export function SearchBar({ defaultValue = "" }: { defaultValue?: string }) {
       if (trimmed) params.set("q", trimmed)
       else params.delete("q")
       const qs = params.toString()
-      router.push(qs ? `/snippets?${qs}` : "/snippets")
+      router.push(qs ? `/dashboard/snippets?${qs}` : "/dashboard/snippets")
     },
     [router],
   )

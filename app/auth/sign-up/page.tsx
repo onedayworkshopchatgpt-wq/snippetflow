@@ -2,13 +2,24 @@ import Link from "next/link"
 import { Braces } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { SignInForm } from "@/components/auth/sign-in-form"
+import { SignUpForm } from "@/components/auth/sign-up-form"
 import { BrandingPanel } from "@/components/auth/branding-panel"
 
-export default function SignInPage() {
+const SIGN_UP_BULLETS = [
+  "Unlimited snippets",
+  "Collections & Smart Tags",
+  "Secure sharing",
+]
+
+export default function SignUpPage() {
   return (
     <div className="grid min-h-dvh lg:grid-cols-[55fr_45fr]">
-      <BrandingPanel />
+      <BrandingPanel
+        badge="Get started"
+        heading="Create your developer workspace."
+        description="Store, organize and share your snippets from one secure place."
+        bullets={SIGN_UP_BULLETS}
+      />
 
       <div className="flex items-center justify-center px-4 py-10 sm:px-6">
         <div className="w-full max-w-[420px] animate-fade-in motion-reduce:animate-none">
@@ -29,14 +40,14 @@ export default function SignInPage() {
 
           <div className="rounded-2xl border border-border/60 bg-card/80 p-6 shadow-float backdrop-blur-xl transition-all duration-300 supports-[backdrop-filter]:bg-card/60 hover:shadow-lifted sm:p-8">
             <h2 className="font-heading text-2xl font-semibold tracking-tight">
-              Sign In
+              Sign Up
             </h2>
             <p className="mt-1.5 text-sm text-muted-foreground">
-              Welcome back to SnippetFlow.
+              Create your account to start organizing snippets.
             </p>
 
             <div className="mt-6">
-              <SignInForm />
+              <SignUpForm />
             </div>
 
             <div className="my-6 flex items-center gap-3" aria-hidden>
@@ -54,12 +65,12 @@ export default function SignInPage() {
             </Button>
 
             <p className="mt-6 text-center text-sm text-muted-foreground">
-              Don&apos;t have an account?{" "}
+              Already have an account?{" "}
               <Link
-                href="/auth/sign-up"
+                href="/auth/sign-in"
                 className="rounded-md font-medium text-foreground underline-offset-4 transition-colors duration-200 hover:text-primary hover:underline focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
               >
-                Sign Up
+                Sign In
               </Link>
             </p>
           </div>

@@ -1,0 +1,7 @@
+export { DashboardHome } from "./dashboard-home";
+export { WelcomeHeader } from "./welcome-header";
+export { QuickActions } from "./quick-actions";
+export { ContinueWorking } from "./continue-working";
+export { RecentActivity } from "./recent-activity";
+export { Collections } from "./collections";
+export { HelpfulResources } from "./helpful-resources";
